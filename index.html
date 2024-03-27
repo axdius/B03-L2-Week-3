@@ -3,11 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>L2 Week 3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+
+        <!-- Header Section of the Page -->
+
+        <header class="header">
+            <div class="section above">
+                <p class="offer-text" >SUPER  SALE  UPTO  40%  OFF</p>
+            </div>
+            <div class="section lower">
+                <ul class="links">
+                    <li class="link">
+                        <a href="#" class="herf"><p class="text">SHOP</p></a>
+                    </li>
+                    <li class="link">
+                        <a href="#" class="herf"><p class="text">COMMUNITY</p></a>
+                    </li>
+                </ul>
+                <img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526121/Registered_Logo_PNG-02_4435x_1_i1b7wx.png" alt="header logo" class="header-logo"/>
+                <ul class="links">
+                    <li class="link">
+                        <a href="#"><img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526122/Link_SVG_z5sm23.png" alt="profile" class="icon"></a>
+                    </li>
+                    <li class="link">
+                        <a href=""><img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526121/Link_SVG_1_bzlq2f.png" alt="search" class="icon"></a>
+                    </li>
+                    <li class="link">
+                        <a href=""><img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526121/Link_SVG_2_sfjii0.png" alt="cart" class="icon"></a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Banner Section of the page -->
+
+        <div class="section-container">
+            <section class="banner-section">
+                <img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526123/Poster_s2lhrv.png" alt="banner" class="banner-image">
+                <div class="banner-text">
+                    <h1 class="heading">Stock photos </h1>
+                    <p class="description">John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.</p>
+                    <button class="explore-button">
+                        <img src="https://res.cloudinary.com/dfsppvj1s/image/upload/v1711527683/Play_lakumw.png" alt="play">
+                        Explore
+                    </button>
+                </div>
+            </section>
+
+            <!-- Search Input Section of the page -->
+
+            <div class="search-input">
+                <form class="searchbox">
+                    <input type="search" placeholder="Search" />
+                    <button type="submit" value="search">&nbsp;</button>
+                </form>
+            </div> 
+
+            <!-- Search result of the input  -->
+
+            <div class="search-result">
+                <div class="result" id="result">
+                </div>
+            </div>
+
+            <!-- Suggested Image Section of the page  -->
+
+            <div class="swiper-section suggested-container" >
+                <h1 class="sub-heading">Similar Results </h1>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper" id="suggestionContainer">
+                      
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                  </div>
+            </div>
+
+            <!-- Wishlist Section of the Page  -->
+
+            <div class="swiper-section wishlist-container" >
+                <div class="title-section">
+                    <h1 class="sub-heading">Favorites List</h1>
+                    <div>
+                        <label for="select">Sort: </label>
+                        <select name="" id="select">
+                            <option value="" selected></option>
+                            <option value="">By Name</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper" id="wishlistContainer">
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 5,
+      spaceBetween: 40,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
     <script src="script.js"></script>
 </body>
 </html>
