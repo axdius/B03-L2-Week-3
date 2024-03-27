@@ -1,8 +1,7 @@
-// Define constants for containers
 let resultContainer = document.getElementById('result');
 let suggestionContainer = document.getElementById('suggestionContainer');
 let wishListContainer = document.getElementById('wishlistContainer');
-
+let searchTerm;
 // Define API key
 const apikey = "WIs3btbmkJIwgTmCXAKYoGJjoG9RRAuRBWr7tZ7Y9rJyPw37dzKGshLS";
 
@@ -38,16 +37,13 @@ async function fetchData(searchTerm = "apple") {
     }
 }
 
-// Call fetchData with a default search term when the page content is loaded
-document.addEventListener('DOMContentLoaded', async function() {
-    await fetchData();
-});
+
 
 // Event listener for the form submission
 document.querySelector('.searchbox').addEventListener('submit', async function(event) {
     event.preventDefault();
-    searchValue = event.target.querySelector('input[type="search"]').value;
-    await fetchData(searchValue);
+    searchTerm = event.target.querySelector('input[type="search"]').value;
+    await fetchData(searchTerm);
     event.target.querySelector('input[type="search"]').value = '';
 });
 
@@ -55,16 +51,35 @@ document.querySelector('.searchbox').addEventListener('submit', async function(e
 function renderFirstResult(result) {
     let firstResult = document.createElement('div');
     firstResult.classList.add('result');
-    firstResult.innerHTML = `
-        <img class="item-image" src="${result.src.original}" alt="demo">
-        <div class="result-text">
-            <h3 class="alt-text">${result.alt}</h3>
-            <p class="name">${result.photographer}</p>
-            <button class="explore-button">
-                Explore More
-            </button>
-        </div>
-    `;
+
+    let imageTag = document.createElement('img');
+    imageTag.classList.add('item-image');
+    imageTag.src = `${result.src.original}`;
+    imageTag.alt = 'demo'
+
+    let resultTextContainer = document.createElement('div');
+    resultTextContainer.classList.add('result-text');
+    
+    let subHeading = document.createElement('h3');
+    subHeading.textContent = `${result.alt}`;
+    subHeading.classList.add('alt-text');
+
+    let nameText = document.createElement('p')
+    nameText.textContent = `${result.photographer}`
+    nameText.classList.add('name')
+
+    let buttonEl =  document.createElement('button')
+    buttonEl.textContent ='Explore More'
+    buttonEl.classList.add('explore-button')
+
+    resultTextContainer.appendChild(subHeading);
+    resultTextContainer.appendChild(nameText);
+    resultTextContainer.appendChild(buttonEl);
+
+    firstResult.appendChild(imageTag);
+    firstResult.appendChild(resultTextContainer)
+
+
     resultContainer.appendChild(firstResult);
 }
 
@@ -87,36 +102,7 @@ function renderSuggestedImages(photos) {
     });
 }
 
-// Event listener for "Add to Wishlist" button click
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('add-to-wishlist')) {
-        const imageData = {
-            src: event.target.dataset.src,
-            alt: event.target.dataset.alt,
-            photographer: event.target.dataset.photographer
-        };
-        let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
-        const exists = wishlistItems.some(item => item.src === imageData.src);
-        if (!exists) {
-            wishlistItems.push(imageData);
-            localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
-            renderWishlist();
-        }
-    }
+// Call fetchData with a default search term when the page content is loaded
+document.addEventListener('DOMContentLoaded', async function() {
+    await fetchData(searchTerm);
 });
-
-// Function to render wishlist items
-function renderWishlist() {
-    wishListContainer.innerHTML = '';
-    const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
-    wishlistItems.forEach(item => {
-        const itemContainer = document.createElement('div');
-        itemContainer.classList.add('swiper-slide');
-        itemContainer.innerHTML = `
-            <img class="fetch-image" src="${item.src}" alt="${item.alt}">
-            <h4 class="image-alt">${item.alt}</h4>
-            <p class="name">${item.photographer}</p>
-        `;
-        wishListContainer.appendChild(itemContainer);
-    });
-}

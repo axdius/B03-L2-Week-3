@@ -4,6 +4,7 @@
 body{
     margin: 0;
     box-sizing: border-box;
+    width: 100vw;
 }
 
 /* typograpy  */
@@ -24,28 +25,19 @@ body{
          url('path/to/font.woff') format('woff');
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin: 0;
-    width: 100%;
-}
+/* Header Section  */
 
-/* Header section  */
-.header {
+.header-section {
     height: 16vh;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.section{
+.above {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-}
-.above {
     height: 6vh;
     background: #231F20;
     color: #fafafa;
@@ -53,11 +45,17 @@ body{
 }
 .lower {
     display: flex;
+    height: 10vh;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
+.screen-view {
+    display: none;
+}
+
 .links .link a {
     text-decoration: none;
     color: black;
@@ -76,44 +74,124 @@ body{
     font-family: 'Neutra Text';
 }
 
-/* Banner Section  */
-.section-container {
-    width: 100%;
-}
-.banner-section {
-    margin: 0;
-    height: auto;
+/* hamburger-menu class list */
+
+.hamburger-menu {
+    display: block;
     position: relative;
-    padding: 150px;
-}
-.banner-image {
     width: 100%;
-    height: 70vh;
+}
+
+.hamburger {
+    display: block;
     position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 0;
+    right: 5px;
+    cursor: pointer;
+    z-index: 22;
 }
+
+.line {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: transform 0.3s ease;
+}
+
+#toggle {
+    display: none;
+}
+
+#toggle:checked + .hamburger .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+#toggle:checked + .hamburger .line:nth-child(2) {
+    opacity: 0;
+}
+
+#toggle:checked + .hamburger .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    width: 200px;
+    height: 100%;
+    padding-top: 80px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transform: translateX(200px);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
+#toggle:checked + .hamburger ~ nav {
+    transform: translateX(0);
+}
+
+@media screen and (min-width: 600px) {
+    .hamburger-mobile-view{
+        display: none;
+    }
+    .screen-view {
+        display: flex;
+    }
+    
+}
+
+
+/* Banner Section  */
+.banner-section {
+    background-image: url('https://res.cloudinary.com/dfsppvj1s/image/upload/v1711526123/Poster_s2lhrv.png');
+    height: 60vh;
+    max-width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .banner-text {
-    position: relative;
-    width: 500px;
-    z-index: 5;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 .heading {
     font-family: "DM Sans";
     color: white ;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 28px;
     margin: 0;
 }
 .description {
     font-family: 'DM Sans';
     color: white;
-    font-size: 14px;
+    font-size: 10px;
     width: 300px;
 }
 .explore-button {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 700;
     background: #BE123C;
     display: flex;
@@ -133,10 +211,30 @@ body{
     -o-border-radius: 5px;
 }
 
+@media screen and (min-width: 600px) {
+    .banner-section {
+        padding-left: 100px;
+        padding-right: 100px;
+        justify-content: flex-start;
+    }  
+    .banner-text {
+        width: 500px;
+        
+    }
+    .heading{
+        font-size: 48px;
+    }  
+    .description {
+        font-size: 14px;
+    }
+    .explore-button{
+        font-size: 14px;
+    }
+}
 
 
+/* Search Bar Section */
 
-/* Search input styling */
 
 .searchbox{
     background-color:#fffbf8;
@@ -210,25 +308,42 @@ input[type="search"]:focus{
     outline:0;
 }
 
-/* search result section  */
+/* Search result only one */
+
 .search-result {
     display: flex;
-    align-items: flex-start;
-    padding: 100px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-left: 20px;
+    padding: 10px;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1), 
+        0 6px 10px rgba(0, 0, 0, 0.1), 
+        0 15px 25px rgba(0, 0, 0, 0.1);
 }
 .result{
+    width: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .item-image {
-    height: 200px;
-    width: 350px;
-    margin: 10px;
+    height: 280px;
+    width: 280px;
+}
+.result-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
 }
 .alt-text {
-    font-family: 'Roboto';
-    font-size: 40px;
+    font-size: 20px;
+    font-family: "Roboto";
     margin: 0;
 }
 .name {
@@ -236,8 +351,28 @@ input[type="search"]:focus{
     font-size: 10px;
     color: #B91C1C;
 }
+@media screen and (min-width : 600px) {
+    .search-result {
+        width: 550px;
+        padding: 50px;
+        margin-left: 20px;
+    }
+    .result {
+        flex-direction: row;
+    }
+    .result-text {
+        align-items: flex-start;
+        margin-left: 20px;
+    }
+    .alt-text {
+        font-size: 30px;
+    }
+}
+
 
 /* Suggestion section  */
+
+
 
 .swiper-slide .fetch-image {
     height: 200px;
@@ -281,10 +416,20 @@ input[type="search"]:focus{
     font-size: 18px;
     background: #fff;
     display: flex;
+    width: 300px !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+    border-radius: 10px;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1), 
+        0 6px 10px rgba(0, 0, 0, 0.1), 
+        0 15px 25px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
 
   .swiper-slide img {
     display: block;
