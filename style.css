@@ -314,7 +314,7 @@ input[type="search"]:focus{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: auto;
     margin-left: 20px;
     padding: 10px;
